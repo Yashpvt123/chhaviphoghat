@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full-size Photo Collage with Frame</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>My Photo Collection</h1>
+        <div class="frame">
+            <div class="collage">
+                <div class="photo-container" onclick="openModal('1.jpg', 'Summer Vacation')">
+                    <img src="1.jpg" alt="Summer Vacation" class="photo">
+                    <span class="caption">Summer Vacation</span>
+                </div>
+                <div class="photo-container" onclick="openModal('2.jpg', 'City Lights')">
+                    <img src="2.jpg" alt="City Lights" class="photo">
+                    <span class="caption">City Lights</span>
+                </div>
+                <div class="photo-container" onclick="openModal('3.jpg', 'Mountain Hike')">
+                    <img src="3.jpg" alt="Mountain Hike" class="photo">
+                    <span class="caption">Mountain Hike</span>
+                </div>
+                <div class="photo-container" onclick="openModal('4.jpg', 'Beach Sunset')">
+                    <img src="4.jpg" alt="Beach Sunset" class="photo">
+                    <span class="caption">Beach Sunset</span>
+                </div>
+                <div class="photo-container" onclick="openModal('5.jpg', 'Forest Adventure')">
+                    <img src="5.jpg" alt="Forest Adventure" class="photo">
+                    <span class="caption">Forest Adventure</span>
+                </div>
+                <div class="photo-container" onclick="openModal('6.jpg', 'Winter Wonderland')">
+                    <img src="6.jpg" alt="Winter Wonderland" class="photo">
+                    <span class="caption">Winter Wonderland</span>
+                </div>
+                <div class="photo-container" onclick="openModal('7.jpg', 'Spring Blossoms')">
+                    <img src="7.jpg" alt="Spring Blossoms" class="photo">
+                    <span class="caption">Spring Blossoms</span>
+                </div>
+                <div class="photo-container" onclick="openModal('8.jpg', 'Autumn Colors')">
+                    <img src="8.jpg" alt="Autumn Colors" class="photo">
+                    <span class="caption">Autumn Colors</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for displaying enlarged image -->
+    <div id="modal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="caption" class="caption"></div>
+    </div>
+
+    <script>
+        // Function to open modal
+        function openModal(imageSrc, captionText) {
+            document.getElementById("modal").style.display = "flex";
+            document.getElementById("modalImage").src = imageSrc;
+            document.getElementById("caption").innerHTML = captionText;
+        }
+
+        // Function to close modal
+        function closeModal() {
+            document.getElementById("modal").style.display = "none";
+        }
+    </script>
+</body>
+</html>

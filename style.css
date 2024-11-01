@@ -1,0 +1,260 @@
+/* Basic resets and global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #89f7fe, #66a6ff, #ff9a9e, #fad0c4);
+    background-size: 400% 400%;
+    color: #333;
+    line-height: 1.6;
+    animation: bgAnimation 15s ease infinite;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+    font-size: 2.5rem;
+    text-shadow: 3px 3px 5px rgba(0,0,0,0.2);
+    padding: 0.5rem 1rem;
+    border: 4px solid #2c3e50;
+    border-radius: 10px;
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.8);
+    animation: textFadeIn 2s ease forwards;
+}
+/* Existing styles remain unchanged... */
+
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    max-width: 90%; /* Limit size */
+    max-height: 80%; /* Limit height */
+    border: 5px solid #ffffff; /* Border around the image */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.close {
+    position: absolute; /* Position the close button */
+    top: 10px;
+    right: 25px;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+@keyframes bgAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+@keyframes textFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.collage {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 1.5rem;
+}
+
+
+.photo-container {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    border: 12px solid #ffffff;
+    outline: 4px solid #e0e0e0;
+    animation: fadeIn 0.5s ease-in-out backwards;
+    transform: scale(0.9);
+}
+
+.photo-container:hover {
+    transform: scale(1.1) rotate(2deg);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    outline-color: #3498db;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.photo {
+    width: 100%;
+    height: 130%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.photo-container:hover .photo {
+    transform: scale(1.1) rotate(-2deg);
+}
+
+.photo-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.photo-container:hover::before {
+    opacity: 1;
+}
+
+.caption {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(1rem);
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+    z-index: 2;
+}
+
+.photo-container:hover .caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .frame {
+        padding: 1rem;
+        border-width: 10px;
+    }
+
+    .collage {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+
+    .photo-container {
+        border-width: 6px;
+    }
+
+    body {
+        animation: bgAnimationMobile 20s ease infinite;
+    }
+
+    @keyframes bgAnimationMobile {
+        0% { background-position: 0% 0%; }
+        50% { background-position: 100% 0%; }
+        100% { background-position: 0% 0%; }
+    }
+
+    .photo-container:hover {
+        transform: scale(1.03) rotate(1deg);
+    }
+
+    .photo-container:hover .photo {
+        transform: scale(1.05) rotate(-1deg);
+    }
+
+    .caption {
+        font-size: 1rem;
+        transform: translateY(1.5rem);
+    }
+}
+
+/* Additional enhancements */
+@media (min-width: 1024px) {
+    .collage {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Staggered animations */
+.photo-container:nth-child(1) { animation-delay: 0.1s; }
+.photo-container:nth-child(2) { animation-delay: 0.2s; }
+.photo-container:nth-child(3) { animation-delay: 0.3s; }
+.photo-container:nth-child(4) { animation-delay: 0.4s; }
+.photo-container:nth-child(5) { animation-delay: 0.5s; }
+.photo-container:nth-child(6) { animation-delay: 0.6s; }
+.photo-container:nth-child(7) { animation-delay: 0.7s; }
+.photo-container:nth-child(8) { animation-delay: 0.8s; }
+
+/* Responsive gradient for tablet screens */
+@media (max-width: 1024px) {
+    body {
+        background: linear-gradient(120deg, #8fd3f4, #84fab0, #ffecd2);
+        background-size: 300% 300%;
+        animation: bgAnimationTablet 20s ease infinite;
+    }
+
+    @keyframes bgAnimationTablet {
+        0% { background-position: 0% 0%; }
+        50% { background-position: 100% 0%; }
+        100% { background-position: 0% 0%; }
+    }
+}
+
+/* Responsive gradient for mobile screens */
+@media (max-width: 768px) {
+    body {
+        background: linear-gradient(110deg, #ff9a9e, #fad0c4, #a18cd1, #fbc2eb);
+        background-size: 250% 250%;
+        animation: bgAnimationMobile 25s ease infinite;
+    }
+
+    @keyframes bgAnimationMobile {
+        0% { background-position: 0% 0%; }
+        50% { background-position: 100% 100%; }
+        100% { background-position: 0% 0%; }
+    }
+}
